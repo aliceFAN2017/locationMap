@@ -1,0 +1,27 @@
+<h1>Location Map</h1>
+<div leaflet style="height: 450px"
+      [leafletOptions]="options"
+      [(leafletCenter)]="options.center"
+      [(leafletZoom)]="options.zoom"
+      [leafletBaseLayers]="baseLayers"
+      [leafletLayersControlOptions]="layersControlOptions"
+      [leafletLayersControl]="layersControl">
+</div>
+
+<input [(ngModel)]="zoom" placeholder="Enter the Zoom you want to set">
+<button (click)="zoomTo()">GO</button>
+
+<input [(ngModel)]="latitude" placeholder="Enter the latitude of the location you want to go">
+<input [(ngModel)]="longitude" placeholder="Enter the longitude of the location you want to go">
+<button (click)="panTo()">GO</button>
+
+<br>
+<input [(ngModel)]="searchLocation" placeholder="Enter the name of the place you want to search">
+<button (click)="search()">Search</button>
+
+<ul>
+  <li *ngFor="let location of foundLocations">
+      {{location['name']}} <button (click)="setMarker(location['geocodePoints'][0]['coordinates'][0],location['geocodePoints'][0]['coordinates'][1])">Choose</button>
+      {{location['geocodePoints'][0]['coordinates']}}
+  </li>
+</ul>
